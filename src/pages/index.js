@@ -1,20 +1,48 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+
+class Button extends React.Component {
+  componentDidMount() {
+    this.stripe = window.Stripe("pk_test_mu6S6VL4flxLGXYdvCcjhSUS00yNSJW447")
+  }
+
+  render() {
+    return (
+      <form
+        onSubmit={event => {
+          event.preventDefault()
+          this.stripe
+            .redirectToCheckout({
+              items: [{ sku: "sku_ExdjYr4Iyyai6x", quantity: 1 }],
+
+              // Note that it is not guaranteed your customers will be redirected to this
+              // URL *100%* of the time, it's possible that they could e.g. close the
+              // tab between form submission and the redirect.
+              successUrl: "http://localhost:8000/success",
+              cancelUrl: "http://localhost:8000/canceled",
+            })
+            .then(function(result) {
+              if (result.error) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, display the localized error message to your customer.
+                var displayError = document.getElementById("error-message")
+                displayError.textContent = result.error.message
+              }
+            })
+        }}
+      >
+        <button type="submit">Buy Pants</button>
+      </form>
+    )
+  }
+}
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Buy Freelance Pants!</h1>
+    <Button />
   </Layout>
 )
 
