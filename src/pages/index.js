@@ -2,16 +2,13 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const stripeSuccessUrl = process.env.DEPLOY_HOST_URL;
-const stripCancelUrl = `${process.env.DEPLOY_HOST_URL}/canceled`
-
 class Button extends React.Component {
   componentDidMount() {
     this.stripe = window.Stripe("pk_test_mu6S6VL4flxLGXYdvCcjhSUS00yNSJW447")
   }
 
   render() {
-    console.log(stripeSuccessUrl)
+    console.log(`${process.env.DEPLOY_HOST_URL}`);
     return (
       <form
         onSubmit={event => {
@@ -23,8 +20,8 @@ class Button extends React.Component {
               // Note that it is not guaranteed your customers will be redirected to this
               // URL *100%* of the time, it's possible that they could e.g. close the
               // tab between form submission and the redirect.
-              successUrl: stripeSuccessUrl,
-              cancelUrl: stripCancelUrl,
+              successUrl: `${process.env.DEPLOY_HOST_URL}/success`,
+              cancelUrl: `${process.env.DEPLOY_HOST_URL}/canceled`,
             })
             .then(function(result) {
               if (result.error) {
