@@ -21,8 +21,8 @@ class Product extends React.Component {
           // Note that it is not guaranteed your customers will be redirected to this
           // URL *100%* of the time, it's possible that they could e.g. close the
           // tab between form submission and the redirect.
-          successUrl: "http://localhost:8000/success",
-          cancelUrl: "http://localhost:8000/canceled",
+          successUrl: `${DEPLOY_HOST_URL}/success`,
+          cancelUrl: `${DEPLOY_HOST_URL}/canceled`,
         })
         .then(function(result) {
           if (result.error) {
