@@ -8,6 +8,7 @@ class Button extends React.Component {
   }
 
   render() {
+    console.log(`${process.env.DEPLOY_HOST_URL}`);
     return (
       <form
         onSubmit={event => {

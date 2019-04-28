@@ -37,6 +37,7 @@ class Product extends React.Component {
   }
 
   render() {
+    console.log(`${process.env.DEPLOY_HOST_URL}`);
     const { id, currency, price, name } = this.props
     const priceFloat = (price / 100).toFixed(2)
     const formattedPrice = new Intl.NumberFormat("en-us", {
