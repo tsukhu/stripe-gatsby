@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const stripeSuccessUrl = `${process.env.DEPLOY_HOST_URL}/success`
+const stripeSuccessUrl = process.env.DEPLOY_HOST_URL;
 const stripCancelUrl = `${process.env.DEPLOY_HOST_URL}/canceled`
 
 class Button extends React.Component {
